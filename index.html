@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Auto Refresh Tool</title>
+
+<style>
+body {
+  font-family: Arial;
+  background: #0f172a;
+  color: white;
+  text-align: center;
+  padding: 40px;
+}
+
+input, select, button {
+  padding: 10px;
+  margin: 10px;
+  width: 300px;
+  border-radius: 8px;
+  border: none;
+}
+
+button {
+  background: #22c55e;
+  color: white;
+  cursor: pointer;
+}
+
+button.stop {
+  background: #ef4444;
+}
+
+.box {
+  margin-top: 20px;
+  padding: 20px;
+  background: #1e293b;
+  border-radius: 10px;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>Auto Refresh Website</h1>
+
+<div class="box">
+
+<input id="url" placeholder="Enter URL (https://example.com)">
+
+<br>
+
+<select id="time">
+  <option value="3000">3 seconds</option>
+  <option value="5000">5 seconds</option>
+  <option value="8000">8 seconds</option>
+  <option value="10000">10 seconds</option>
+  <option value="15000">15 seconds</option>
+</select>
+
+<br>
+
+<button onclick="start()">Start</button>
+<button class="stop" onclick="stop()">Stop</button>
+
+<p id="status">Status: Idle</p>
+
+</div>
+
+<script>
+
+let interval;
+
+function start() {
+  let url = document.getElementById("url").value;
+  let time = document.getElementById("time").value;
+
+  if (!url) {
+    alert("Please enter URL");
+    return;
+  }
+
+  document.getElementById("status").innerText = "Status: Running";
+
+  stop(); // clear old interval
+
+  interval = setInterval(() => {
+    window.open(url, "_blank"); 
+    window.focus();
+  }, time);
+}
+
+function stop() {
+  clearInterval(interval);
+  document.getElementById("status").innerText = "Status: Stopped";
+}
+
+</script>
+
+</body>
+</html>
